@@ -107,7 +107,7 @@ class N8NApiWrapper {
                 logger_1.default.log(`Activating workflow with ID: ${id}`);
                 // Get the workflow first to check if it has triggers
                 const workflow = await this.getWorkflow(id, instanceSlug);
-                const response = await api.patch(`/workflows/${id}`, { active: true });
+                const response = await api.post(`/workflows/${id}/activate`);
                 logger_1.default.log(`Activated workflow: ${response.data.name}`);
                 return response.data;
             }
@@ -121,7 +121,7 @@ class N8NApiWrapper {
             const api = this.envManager.getApiInstance(instanceSlug);
             try {
                 logger_1.default.log(`Deactivating workflow with ID: ${id}`);
-                const response = await api.patch(`/workflows/${id}`, { active: false });
+                const response = await api.post(`/workflows/${id}/deactivate`);
                 logger_1.default.log(`Deactivated workflow: ${response.data.name}`);
                 return response.data;
             }
